@@ -1,171 +1,65 @@
-# TUGAS BESAR 1 STRATEGI ALGORITMA IF2211
-## Pemanfaatan Algoritma Greedy dalam pembuatan bot permainan Diamonds
-## Kelompok Mangu (7)
-## Kelas RC
----
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Anggota Kelompok
+# 💎 Etimo Diamonds 2
 
-| Nama                          | NIM         |
-|-------------------------------|-------------|
-| Afifa Aulia                   | 123140073   |
-| Bening Apni Prameswari        | 123140089   |
-| Raisya Syifa Saleh            | 123140169   |
+Diamonds is a programming challenge. Program a bot and compete to get the highest score. For more information:
 
----
+-   [Project Specification](https://docs.google.com/document/d/13cbmMVXviyu8eKQ6heqgDzt4JNNMeAZO/edit)
+-   [Get Started with Diamonds](https://docs.google.com/document/d/1L92Axb89yIkom0b24D350Z1QAr8rujvHof7-kXRAp7c/edit)
 
-## Deskripsi Singkat
+## Installing Dependencies 🔨
 
-**Diamonds** adalah sebuah tantangan pemrograman di mana kamu akan membuat bot untuk mengumpulkan diamond sebanyak mungkin dalam grid permainan sambil bersaing melawan bot milik peserta lain. Bot yang kamu buat harus mampu mengatur arah gerak, menghindari musuh, serta kembali ke base untuk menyetorkan poin — semua itu dalam waktu terbatas.
+1. Clone this repository and move to the root of this project's directory
 
-Repositori ini berisi implementasi strategi **Greedy by Point per Distance** (alias Highest Density), yaitu strategi yang memilih diamond berdasarkan **rasio poin / jarak tempuh terbaik** agar lebih efisien.
+    ```
+    git clone https://github.com/haziqam/tubes1-IF2110-bot-starter-pack.git
+    cd ./tubes1-IF2110-bot-starter-pack
+    ```
 
----
+2. Install dependencies
 
-## Struktur Folder
+    ```
+    pip install -r requirements.txt
+    ```
 
-```
-tubes1-IF2211-bot-starter-pack-1.0.1/
-├── __pycache__/
-│   └── decode.cpython-313.pyc
-├── game/
-│   ├── __pycache__/
-│   ├── logic/
-│   │   ├── __pycache__/
-│   │   ├── __init__.py
-│   │   ├── base.py
-│   │   ├── greedybot.py
-│   │   ├── mybot.py
-│   │   ├── random.py
-│   ├── __init__.py
-│   ├── api.py
-│   ├── board_handler.py
-│   ├── bot_handler.py
-│   ├── models.py
-│   ├── util.py
-├── .gitignore
-├── decode.py
-├── main.py
-├── README.md
-├── requirements.txt
-├── run-bots.bat
-└── run-bots.sh
-```
+## How to Run 💻
 
-## Kebutuhan Sistem
+1. To run one bot
 
-### Game Engine:
-- Node.js
-- Docker Desktop
-- Yarn (install dengan: `npm install --global yarn`)
+    ```
+    python main.py --logic Random --email=your_email@example.com --name=your_name --password=your_password --team etimo
+    ```
 
-### Bot Starter Pack:
-- Python 3.13
+2. To run multiple bots simultaneously
 
----
+    For Windows
 
-## Cara Menjalankan Game Engine
+    ```
+    ./run-bots.bat
+    ```
 
-1. Download file `.zip` game engine dari:
-   [Game Engine v1.1.0](https://github.com/haziqam/tubes1-IF2211-game-engine/releases/tag/v1.1.0)
+    For Linux / (possibly) macOS
 
-2. Ekstrak dan masuk ke folder hasil ekstrak:
+    ```
+    ./run-bots.sh
+    ```
 
-```bash
-cd tubes1-IF2110-game-engine-1.1.0
-```
+    <b>Before executing the script, make sure to change the permission of the shell script to enable executing the script (for linux/macOS)</b>
 
-3. Jalankan perintah-perintah berikut:
+    ```
+    chmod +x run-bots.sh
+    ```
 
-```bash
-yarn
-./scripts/copy-env.bat
-docker compose up -d database
-./scripts/setup-db-prisma.bat
-npm run build
-npm run start
-```
+#### Note:
 
-> Note:  Pastikan Docker Desktop sudah berjalan sebelum menjalankan perintah database.
+-   If you run multiple bots, make sure each emails and names are unique
+-   The email could be anything as long as it follows a correct email syntax
+-   The name, and password could be anything without any space
 
----
+## Credits 🪙
 
-## Cara Menjalankan Bot Starter Pack
+This repository is adapted from https://github.com/Etimo/diamonds2
 
-1. Download starter pack bot dari:
-   [Bot Starter Pack v1.0.1](https://github.com/haziqam/tubes1-IF2211-bot-starter-pack/releases/tag/v1.0.1)
+Some code in this repository is adjusted to fix some issues in the original repository and to adapt to the requirements of Algorithm Strategies course (IF2211), Informatics Undergraduate Program, ITB.
 
-2. Ekstrak dan masuk ke folder:
-
-```bash
-cd tubes1-IF2211-bot-starter-pack-1.0.1
-```
-
-3. Install dependency:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Jalankan satu bot:
-
-```bash
-python main.py --logic MyBot --email=greedy@bot.com --name="GreedyBot" --password=123 --team=etimo
-```
-
-5. Menjalankan banyak bot:
-
-```bash
-./run-bots.bat    # Windows
-./run-bots.sh     # Linux/macOS
-```
-
-> Gunakan `chmod +x run-bots.sh` jika .sh script belum bisa dijalankan.
-
----
-
-## Strategi yang Digunakan
-
-Berdasarkan hasil analisis dan pengujian, strategi Greedy yang kami gunakan adalah gabungan dari dua pendekatan:
-
-### Greedy by Point per Distance
-
-Bot menghitung rasio antara poin diamond dengan jarak (menggunakan Manhattan Distance) dari posisi bot ke diamond. Semua diamond kemudian diurutkan berdasarkan rasio ini, sehingga diamond yang **paling menguntungkan secara efisiensi** akan diprioritaskan.
-
-Dengan strategi ini, bot dapat:
-- Mengumpulkan lebih banyak poin dalam langkah seminimal mungkin
-- Fokus pada target bernilai tinggi dan mudah dijangkau
-- Menghindari pemborosan langkah untuk diamond yang terlalu jauh
-
-### Greedy by Base Distance
-
-Jika bot sudah membawa 3 diamond (inventory penuh), maka bot akan segera kembali ke base untuk menyetorkan diamond sebelum mengambil yang lain. Strategi ini penting untuk:
-- Menghindari kehilangan diamond karena tackle oleh bot musuh
-- Menjamin konversi diamond menjadi poin
-- Meminimalkan risiko saat inventory penuh
-
-Gabungan dari dua strategi ini membuat bot efisien, responsif, dan aman dalam menghadapi dinamika permainan.
-
----
-
-## Pengujian
-
-Bot telah diuji dan menunjukkan hasil:
-
-- Tidak stuck dalam kondisi board kosong atau penuh
-- Konsisten mengumpulkan poin tinggi
-- Dapat kembali ke base tepat waktu
-- Efisien dalam penggunaan inventory
-- Tidak mudah ditackle karena menghindari musuh
-
----
-
-## Informasi Tambahan
-
-Tugas ini dibuat untuk memenuhi **Tugas Besar 1 mata kuliah IF2211 Strategi Algoritma** - Program Studi Teknik Informatika, Institut Teknologi Sumatera.
-
-Game engine dikembangkan oleh [Etimo](https://github.com/Etimo/diamonds2) dan dimodifikasi untuk keperluan akademik.
-
----
-
-© 2025 – Kelompok Mangu – Strategi Algoritma
+©️ All rights and credits reserved to [Etimo](https://github.com/Etimo)
