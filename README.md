@@ -1,6 +1,6 @@
 # TUGAS BESAR 1 STRATEGI ALGORITMA IF2211
 ## Pemanfaatan Algoritma Greedy dalam pembuatan bot permainan Diamonds
-## Kelompok Mangu
+## Kelompok Mangu (7)
 ## Kelas RC
 ---
 
