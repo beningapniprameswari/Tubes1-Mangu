@@ -60,7 +60,7 @@ tubes1-IF2211-bot-starter-pack-1.0.1/
 - Yarn (install dengan: `npm install --global yarn`)
 
 ### Bot Starter Pack:
-- Python 3.x
+- Python 3.13
 
 ---
 
